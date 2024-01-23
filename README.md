@@ -23,30 +23,11 @@ o365_imap_client.py Commands: Layout: python o365_imap_client.py AUTH(STR) CLIEN
 
 
 
-SOP FOR AZURE TENANT PORTAL 
-OPEN POWERSHELL
- 
-THIS CONNECT TO EXCHANGE SERVER
-Install-Module -Name ExchangeOnlineManagement -allowprerelease
-Import-module ExchangeOnlineManagement 
-Connect-ExchangeOnline -Organization <TENANT_ID>
- 
-GET SERVICEPRICIPAL
-Get-ServicePrincipal | fl
- 
-ADD SERVICE PRINCIPAL
-New-ServicePrincipal -AppId client_id(IN PY APP) -ObjectId enterprise_object_id (GOTO AZURE FIND TE SPECIFIC PRICIPAL AND ITS THE OBJECT ID IN THE OVERVIEW PAGE OF THE PY SERVICE)
- 
-REMOVE SERVICEPRINCIPAL
-Remove-ServicePrincipal  -identity IDENTITY_FOR_GET_SERVICE_PRICIPAL
- 
-SEE MAILBOX PERMS
-Get-MailboxPermission -Identity EMAIL | Format-List
- 
-REMOVE MAILBOX PERMS
-Remove-MailboxPermission -Identity IDENTITY_FROM_GET_MAILBOX -user USER_FROM_GET_MAILBOX_OR_SERVICE_PRICIPAL  -AccessRights FullAccess
-Remove-MailboxPermission -Identity IDENTITY_FROM_GET_MAILBOX -user USER_FROM_GET_MAILBOX_OR_SERVICE_PRICIPAL  -AccessRights ReadPermission
- 
-ADD MAILBOX 
-Add-MailboxPermission -Identity THE_EMAIL  -User USER_FROM_GET_MAILBOX_OR_IDENTITY_FROM_SERVICE_PRICIPAL  -AccessRights FullAccess
-Add-MailboxPermission -Identity THE_EMAIL  -User USER_FROM_GET_MAILBOX_OR_IDENTITY_FROM_SERVICE_PRICIPAL  -AccessRights ReadPermission
+SOP FOR AZURE TENANT PORTAL OPEN POWERSHELL
+THIS CONNECT TO EXCHANGE SERVER Install-Module -Name ExchangeOnlineManagement -allowprerelease Import-module ExchangeOnlineManagement Connect-ExchangeOnline -Organization <TENANT_ID>
+GET SERVICEPRICIPAL Get-ServicePrincipal | fl
+ADD SERVICE PRINCIPAL New-ServicePrincipal -AppId client_id(IN PY APP) -ObjectId enterprise_object_id (GOTO AZURE FIND TE SPECIFIC PRINCIPAL AND IT THE OBJECT ID IN THE OVERVIEW PAGE OF THE PY SERVICE)
+REMOVE SERVICEPRINCIPAL Remove-ServicePrincipal -identity IDENTITY_FOR_GET_SERVICE_PRICIPAL
+SEE MAILBOX PERMS Get-MailboxPermission -Identity EMAIL | Format-List
+REMOVE MAILBOX PERMS Remove-MailboxPermission -Identity IDENTITY_FROM_GET_MAILBOX -user USER_FROM_GET_MAILBOX_OR_SERVICE_PRICIPAL -AccessRights FullAccess Remove-MailboxPermission -Identity IDENTITY_FROM_GET_MAILBOX -user USER_FROM_GET_MAILBOX_OR_SERVICE_PRICIPAL -AccessRights ReadPermission
+ADD MAILBOX Add-MailboxPermission -Identity THE_EMAIL -User USER_FROM_GET_MAILBOX_OR_IDENTITY_FROM_SERVICE_PRICIPAL -AccessRights FullAccess Add-MailboxPermission -Identity THE_EMAIL -User USER_FROM_GET_MAILBOX_OR_IDENTITY_FROM_SERVICE_PRICIPAL -AccessRights ReadPermission
